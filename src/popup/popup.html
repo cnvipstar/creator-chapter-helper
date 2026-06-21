@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>创作者章节助手</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">Creator Chapters</p>
+          <h1>章节助手</h1>
+        </div>
+        <output id="countBadge" class="count-badge">0 条</output>
+      </header>
+
+      <section class="input-section" aria-label="章节原文">
+        <label class="field-label" for="chapterInput">章节原文</label>
+        <textarea
+          id="chapterInput"
+          class="chapter-input"
+          spellcheck="false"
+          placeholder="- 00:05-00:28｜阶段二总结：把规划基石阶段串成一张考试作战地图。"
+        ></textarea>
+      </section>
+
+      <section class="options" aria-label="导入选项">
+        <label class="option-row">
+          <input id="replaceExisting" type="checkbox" checked>
+          <span>清空已有章节</span>
+        </label>
+        <label class="option-row">
+          <input id="truncateTitle" type="checkbox">
+          <span>章节名超长时截断</span>
+        </label>
+        <label class="option-row">
+          <input id="truncateSummary" type="checkbox">
+          <span>简介超长时截断</span>
+        </label>
+        <label class="option-row">
+          <input id="dryRun" type="checkbox">
+          <span>仅预览</span>
+        </label>
+      </section>
+
+      <section class="preview-section" aria-label="解析预览">
+        <div class="section-bar">
+          <h2>预览</h2>
+          <span id="healthText" class="health-text">等待输入</span>
+        </div>
+        <div class="preview-frame">
+          <table class="preview-table">
+            <thead>
+              <tr>
+                <th>开始</th>
+                <th>标题</th>
+                <th>简介</th>
+              </tr>
+            </thead>
+            <tbody id="previewBody">
+              <tr>
+                <td colspan="3" class="empty-cell">粘贴章节后显示预览</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div id="messageBox" class="message-box" role="status" aria-live="polite"></div>
+
+      <footer class="actions">
+        <button id="copyLogsButton" class="secondary-button" type="button">
+          复制错误日志
+        </button>
+        <button id="importButton" class="primary-button" type="button" disabled>
+          写入章节
+        </button>
+      </footer>
+    </main>
+
+    <script src="../platforms/platform-registry.js"></script>
+    <script src="../lib/error-logger.js"></script>
+    <script src="../lib/extension-runtime.js"></script>
+    <script src="../lib/chapter-parser.js"></script>
+    <script src="../lib/text-policy.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

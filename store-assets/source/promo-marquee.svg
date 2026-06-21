@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="560" viewBox="0 0 1400 560" role="img" aria-label="创作者章节助手横幅图">
+  <rect width="1400" height="560" fill="#241F21"/>
+  <rect x="78" y="76" width="540" height="356" rx="12" fill="#FFF8F6"/>
+  <text x="118" y="146" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="34" font-weight="900" fill="#241F21">00:05  阶段二总结</text>
+  <text x="118" y="216" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="34" font-weight="900" fill="#241F21">00:28  建体系到会规划</text>
+  <text x="118" y="286" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="34" font-weight="900" fill="#241F21">00:49  七棵知识树</text>
+  <path d="M686 196l96 84-96 84" fill="none" stroke="#D9294F" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="850" y="210" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="56" font-weight="900" fill="#FFFFFF">把章节文本</text>
+  <text x="850" y="294" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="56" font-weight="900" fill="#FFFFFF">批量写入平台</text>
+  <text x="850" y="366" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="28" fill="#D9D0D4">课程、教程、知识长视频的章节工作台</text>
+  <circle cx="1240" cy="110" r="70" fill="#0E9F9A"/>
+  <circle cx="1280" cy="458" r="92" fill="#D9294F"/>
+</svg>

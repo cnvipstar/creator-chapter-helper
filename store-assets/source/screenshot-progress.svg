@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" role="img" aria-label="创作者页面内写入进度">
+  <rect width="1280" height="800" fill="#F6F6F7"/>
+  <rect x="68" y="48" width="220" height="704" fill="#F0EFF2"/>
+  <text x="110" y="108" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="800" fill="#241F21">创作者中心</text>
+  <rect x="382" y="78" width="514" height="620" rx="0" fill="#FFFFFF"/>
+  <text x="430" y="138" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="28" font-weight="800" fill="#241F21">视频章节</text>
+  <text x="430" y="180" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#756B70">为进度条增加章节信息，让视频结构更清晰</text>
+  <rect x="430" y="230" width="410" height="68" fill="#FFF8F6" stroke="#E6DDE1"/>
+  <text x="460" y="272" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20" fill="#241F21">00:05　阶段二总结</text>
+  <rect x="430" y="316" width="410" height="68" fill="#FFFFFF" stroke="#E6DDE1"/>
+  <text x="460" y="358" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20" fill="#241F21">00:28　建体系到会规划</text>
+  <rect x="430" y="402" width="410" height="68" fill="#FFFFFF" stroke="#E6DDE1"/>
+  <text x="460" y="444" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20" fill="#241F21">00:49　知识树</text>
+  <rect x="828" y="594" width="360" height="142" rx="8" fill="#FFFAF8" stroke="#D9294F"/>
+  <rect x="828" y="594" width="360" height="48" rx="8" fill="#D9294F"/>
+  <text x="852" y="625" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="19" font-weight="800" fill="#FFFFFF">创作者章节助手</text>
+  <text x="852" y="676" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="800" fill="#241F21">写入第 3 条 / 10 条</text>
+  <text x="852" y="706" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="16" fill="#756B70">00:49  知识树</text>
+  <rect x="852" y="718" width="288" height="6" rx="3" fill="#EADFE3"/>
+  <rect x="852" y="718" width="96" height="6" rx="3" fill="#087F7B"/>
+  <text x="100" y="706" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="22" fill="#756B70">执行进度留在页面里，弹窗关闭也能看见。</text>
+</svg>

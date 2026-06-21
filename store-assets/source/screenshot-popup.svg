@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" role="img" aria-label="创作者章节助手弹窗预览">
+  <rect width="1280" height="800" fill="#F8F2EE"/>
+  <rect x="64" y="58" width="1152" height="684" rx="0" fill="#FFFDFC"/>
+  <rect x="64" y="58" width="1152" height="684" fill="none" stroke="#E7DDE1"/>
+  <text x="112" y="126" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="42" font-weight="800" fill="#241F21">粘贴章节，一次写入</text>
+  <text x="112" y="170" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="22" fill="#756B70">把时间轴文本解析成平台视频章节，写入前先预览和校验。</text>
+  <rect x="112" y="218" width="520" height="402" rx="8" fill="#FFF8F6" stroke="#E6DDE1"/>
+  <text x="144" y="266" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="700" fill="#241F21">章节原文</text>
+  <text x="144" y="312" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20" fill="#241F21">- 00:05-00:28｜阶段二总结：把规划基石阶段串成一张考试作战地图。</text>
+  <text x="144" y="352" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20" fill="#241F21">- 00:28-00:49｜建体系到会规划：ISP 定方向，TOGAF 画蓝图。</text>
+  <text x="144" y="392" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20" fill="#241F21">- 00:49-01:09｜知识树：规划、架构、云、网络、数据、安全。</text>
+  <rect x="144" y="460" width="190" height="52" rx="7" fill="#FFFFFF" stroke="#E6DDE1"/>
+  <rect x="160" y="475" width="22" height="22" rx="4" fill="#D9294F"/>
+  <path d="M165 486l6 6 12-14" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="196" y="494" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#241F21">清空已有章节</text>
+  <rect x="352" y="460" width="210" height="52" rx="7" fill="#FFFFFF" stroke="#E6DDE1"/>
+  <rect x="368" y="475" width="22" height="22" rx="4" fill="#D9294F"/>
+  <path d="M373 486l6 6 12-14" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="404" y="494" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#241F21">超长自动截断</text>
+  <rect x="690" y="218" width="478" height="402" rx="8" fill="#FFFFFF" stroke="#E6DDE1"/>
+  <text x="724" y="266" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="700" fill="#241F21">预览</text>
+  <text x="1094" y="266" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700" fill="#087F7B">3 条</text>
+  <rect x="724" y="296" width="410" height="60" fill="#FFF2F5"/>
+  <text x="748" y="335" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700" fill="#756B70">开始</text>
+  <text x="858" y="335" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700" fill="#756B70">标题</text>
+  <text x="1010" y="335" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700" fill="#756B70">简介</text>
+  <text x="748" y="390" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#241F21">00:05</text>
+  <text x="858" y="390" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#241F21">阶段二总结</text>
+  <text x="1010" y="390" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#241F21">作战地图</text>
+  <line x1="724" y1="414" x2="1134" y2="414" stroke="#EFE6EA"/>
+  <text x="748" y="455" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#241F21">00:28</text>
+  <text x="858" y="455" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#241F21">建体系</text>
+  <text x="1010" y="455" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#241F21">TOGAF 蓝图</text>
+  <line x1="724" y1="479" x2="1134" y2="479" stroke="#EFE6EA"/>
+  <text x="748" y="520" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#241F21">00:49</text>
+  <text x="858" y="520" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#241F21">知识树</text>
+  <text x="1010" y="520" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" fill="#241F21">规划、架构</text>
+  <rect x="724" y="560" width="126" height="42" rx="7" fill="#FFFFFF" stroke="#E6DDE1"/>
+  <text x="748" y="587" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="17" font-weight="800" fill="#756B70">复制错误日志</text>
+  <rect x="864" y="560" width="270" height="42" rx="7" fill="#D9294F"/>
+  <text x="942" y="587" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">写入小红书章节</text>
+</svg>

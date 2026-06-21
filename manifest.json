@@ -1,0 +1,67 @@
+{
+  "manifest_version": 3,
+  "name": "创作者章节助手",
+  "version": "0.1.0",
+  "description": "批量导入抖音、小红书创作者视频章节。",
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "创作者章节助手",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png",
+      "48": "assets/icons/icon-48.png",
+      "128": "assets/icons/icon-128.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://creator.douyin.com/*",
+    "https://creator.xiaohongshu.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://creator.xiaohongshu.com/*"
+      ],
+      "js": [
+        "src/content/xiaohongshu-main-world.js"
+      ],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://creator.douyin.com/*",
+        "https://creator.xiaohongshu.com/*"
+      ],
+      "css": [
+        "src/content/douyin.css"
+      ],
+      "js": [
+        "src/platforms/platform-registry.js",
+        "src/lib/extension-runtime.js",
+        "src/lib/error-logger.js",
+        "src/lib/chapter-parser.js",
+        "src/lib/text-policy.js",
+        "src/lib/xiaohongshu-policy.js",
+        "src/lib/xiaohongshu-dom-policy.js",
+        "src/lib/douyin-automation-policy.js",
+        "src/content/platform-progress.js",
+        "src/content/douyin.js",
+        "src/content/xiaohongshu-adapter.js",
+        "src/content/index.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
