@@ -6,7 +6,8 @@ const {
   findChapterItemsByTime,
   findChapterItemByTime,
   findMismatchedChapterIndexesByOrder,
-  normalizeTimeField
+  normalizeTimeField,
+  resolveClickTarget
 } = require('../src/lib/xiaohongshu-dom-policy');
 
 test('normalizes Xiaohongshu time inputs before comparing rows', () => {
@@ -73,4 +74,15 @@ test('finds mismatched rows by current visual order after Xiaohongshu reuses DOM
   ];
 
   assert.deepEqual(findMismatchedChapterIndexesByOrder(rows, chapters), [1]);
+});
+
+test('resolves text nodes inside action controls to the clickable ancestor', () => {
+  const button = { role: 'button' };
+  const label = {
+    closest(selector) {
+      return selector.includes('button') ? button : null;
+    }
+  };
+
+  assert.equal(resolveClickTarget(label), button);
 });

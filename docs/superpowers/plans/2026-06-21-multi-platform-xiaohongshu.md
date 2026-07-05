@@ -19,7 +19,7 @@
 - Create: `src/platforms/platform-registry.js`
 
 - [ ] 写失败测试：识别抖音 URL、小红书 URL、未知 URL。
-- [ ] 写失败测试：抖音标题限制 12，小红书标题限制 14，小红书不支持简介。
+- [ ] 写失败测试：抖音标题限制 12，小红书标题限制 11，小红书不支持简介。
 - [ ] 运行 `npm test`，确认失败。
 - [ ] 实现 `detectPlatform(url)`、`getPlatformConfig(id)`。
 - [ ] 运行 `npm test`，确认通过。
@@ -32,7 +32,7 @@
 
 - [ ] 写失败测试：开始秒数转分钟/秒字段。
 - [ ] 写失败测试：章节名优先用 title。
-- [ ] 写失败测试：title 为空时用 summary 前 14 字。
+- [ ] 写失败测试：title 为空时用 summary 前 11 字。
 - [ ] 写失败测试：超长 title 在不开启截断时报错，开启截断时截断。
 - [ ] 运行 `npm test`，确认失败。
 - [ ] 实现 `prepareXiaohongshuChapters(chapters, options)`。
@@ -115,4 +115,3 @@
 - [ ] 运行全部验证。
 - [ ] 检查 zip 只包含运行所需文件。
 - [ ] 不提交 git，等待用户确认 commit message。
-

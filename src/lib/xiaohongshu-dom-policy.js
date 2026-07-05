@@ -56,11 +56,20 @@
     }, []);
   }
 
+  function resolveClickTarget(element) {
+    if (!element || typeof element.closest !== 'function') {
+      return element || null;
+    }
+
+    return element.closest('button, [role="button"], a') || element;
+  }
+
   return {
     chapterItemMatchesValues,
     findChapterItemsByTime,
     findChapterItemByTime,
     findMismatchedChapterIndexesByOrder,
-    normalizeTimeField
+    normalizeTimeField,
+    resolveClickTarget
   };
 });

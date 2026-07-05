@@ -7,7 +7,7 @@
 
   root.XiaohongshuChapterPolicy = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function createXiaohongshuPolicy() {
-  const XIAOHONGSHU_TITLE_LIMIT = 14;
+  const XIAOHONGSHU_TITLE_LIMIT = 11;
 
   function chars(value) {
     return Array.from(String(value || ''));
@@ -54,7 +54,7 @@
       return '';
     }
 
-    addWarning(target, '章节名为空，已使用简介前 14 个字。');
+    addWarning(target, `章节名为空，已使用简介前 ${XIAOHONGSHU_TITLE_LIMIT} 个字。`);
     return truncate(fallback, XIAOHONGSHU_TITLE_LIMIT);
   }
 
@@ -105,4 +105,3 @@
     prepareXiaohongshuChapters
   };
 });
-

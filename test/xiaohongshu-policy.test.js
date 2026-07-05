@@ -42,18 +42,18 @@ test('uses parsed title as the Xiaohongshu chapter name', () => {
   assert.equal(result.chapters[0].title, '核心流程总览');
 });
 
-test('uses summary when title is empty and truncates fallback to 14 chars', () => {
+test('uses summary when title is empty and truncates fallback to 11 chars', () => {
   const result = prepareXiaohongshuChapters([
     chapter({
       title: '',
-      summary: '这是一个超过十四个字的小红书章节名'
+      summary: '这是一个超过十一个字的小红书章节名'
     })
   ]);
 
-  assert.equal(XIAOHONGSHU_TITLE_LIMIT, 14);
+  assert.equal(XIAOHONGSHU_TITLE_LIMIT, 11);
   assert.equal(result.errors.length, 0);
-  assert.equal(result.chapters[0].title, '这是一个超过十四个字的小红书');
-  assert.match(result.warnings[0].message, /已使用简介前 14 个字/);
+  assert.equal(result.chapters[0].title, '这是一个超过十一个字的');
+  assert.match(result.warnings[0].message, /已使用简介前 11 个字/);
 });
 
 test('reports overlong titles unless truncation is enabled', () => {
@@ -63,12 +63,12 @@ test('reports overlong titles unless truncation is enabled', () => {
     truncateTitle: false
   });
   assert.equal(strict.errors.length, 1);
-  assert.match(strict.errors[0].message, /章节名超过 14 个字/);
+  assert.match(strict.errors[0].message, /章节名超过 11 个字/);
 
   const truncated = prepareXiaohongshuChapters([overlong], {
     truncateTitle: true
   });
   assert.equal(truncated.errors.length, 0);
-  assert.equal(truncated.chapters[0].title, '一二三四五六七八九十甲乙丙丁');
+  assert.equal(truncated.chapters[0].title, '一二三四五六七八九十甲');
   assert.match(truncated.warnings[0].message, /章节名已自动截断/);
 });

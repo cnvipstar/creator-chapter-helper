@@ -162,25 +162,7 @@
 
   async function addChapter(modal, chapter) {
     const beforeItems = getChapterItems(modal).length;
-    const addButton = await waitFor(
-      () => {
-        const button = findAddChapterButton(modal);
-        return button && !isDisabled(button) ? button : null;
-      },
-      4000,
-      '找不到“+ 添加章节”按钮。'
-    );
-
-    clickElement(addButton);
-
-    const item = await waitFor(
-      () => {
-        const items = getChapterItems(modal);
-        return items.length > beforeItems ? items[items.length - 1] : null;
-      },
-      4000,
-      '点击“+ 添加章节”后没有出现新的章节输入行。'
-    );
+    const item = await addChapterItemWithRetry(modal, beforeItems);
 
     const minuteInput = await waitFor(() => getMinuteInput(item), 3000, '找不到分钟输入框。');
     const secondInput = await waitFor(() => getSecondInput(item), 3000, '找不到秒数输入框。');
@@ -195,6 +177,38 @@
     );
     await fillChapterTitlesByTime(modal, chapter);
     await sleep(120);
+  }
+
+  async function addChapterItemWithRetry(modal, beforeItems) {
+    const startedAt = Date.now();
+    let attempted = false;
+
+    while (Date.now() - startedAt < 7000) {
+      const existing = getChapterItems(modal);
+      if (existing.length > beforeItems) {
+        return existing[existing.length - 1];
+      }
+
+      const addButton = findAddChapterButton(modal);
+      if (!addButton || isDisabled(addButton)) {
+        await sleep(120);
+        continue;
+      }
+
+      attempted = true;
+      clickElement(addButton);
+
+      const responseStartedAt = Date.now();
+      while (Date.now() - responseStartedAt < 850) {
+        const items = getChapterItems(modal);
+        if (items.length > beforeItems) {
+          return items[items.length - 1];
+        }
+        await sleep(100);
+      }
+    }
+
+    throw new Error(attempted ? '点击“+ 添加章节”后没有出现新的章节输入行。' : '找不到“+ 添加章节”按钮。');
   }
 
   async function synchronizeChapters(modal, chapters, startIndex) {
@@ -592,12 +606,16 @@
   }
 
   function clickElement(element) {
-    element.scrollIntoView({ block: 'center', inline: 'center' });
-    element.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true, view: window }));
-    element.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, view: window }));
-    element.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, cancelable: true, view: window }));
-    element.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window }));
-    element.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+    const target = globalThis.XiaohongshuDomPolicy && globalThis.XiaohongshuDomPolicy.resolveClickTarget
+      ? globalThis.XiaohongshuDomPolicy.resolveClickTarget(element)
+      : element;
+
+    target.scrollIntoView({ block: 'center', inline: 'center' });
+    target.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, cancelable: true, view: window }));
+    target.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, view: window }));
+    target.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, cancelable: true, view: window }));
+    target.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window }));
+    target.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
   }
 
   function findVisibleByText(root, text, options = {}) {
@@ -718,12 +736,37 @@
     return {
       modalFound: Boolean(modal),
       chapterCountText: modal ? normalizeText(modal.textContent).match(/已添加\s*\d+\s*个章节/)?.[0] || '' : '',
+      addButton: modal ? describeElement(findAddChapterButton(modal)) : null,
       rows,
       emptyRows: rows.filter((row) => !String(row.values.title || '').trim()).map((row) => row.index),
       expectedChapters: prepared,
       mismatchedRows: modal && prepared.length > 0 ? findMismatchedIndexesByOrder(modal, prepared, 0).map((index) => index + 1) : [],
       payloadChapterCount: Array.isArray(payload.chapters) ? payload.chapters.length : 0,
       options: payload.options || {}
+    };
+  }
+
+  function describeElement(element) {
+    if (!element) {
+      return null;
+    }
+
+    const target = globalThis.XiaohongshuDomPolicy && globalThis.XiaohongshuDomPolicy.resolveClickTarget
+      ? globalThis.XiaohongshuDomPolicy.resolveClickTarget(element)
+      : element;
+    const rect = target.getBoundingClientRect();
+
+    return {
+      text: normalizeText(element.textContent),
+      targetTagName: target.tagName ? target.tagName.toLowerCase() : '',
+      className: String(target.className || ''),
+      disabled: isDisabled(target),
+      rect: {
+        x: Math.round(rect.x),
+        y: Math.round(rect.y),
+        width: Math.round(rect.width),
+        height: Math.round(rect.height)
+      }
     };
   }
 

@@ -36,7 +36,7 @@ test('caps error log entries to avoid unbounded local storage growth', () => {
 
 test('formats logs as readable Chinese text for copying', () => {
   const text = formatErrorLogs({
-    date: todayKey(new Date('2026-06-21T08:00:00+08:00')),
+    date: todayKey(),
     entries: [
       {
         time: '2026-06-21T00:00:00.000Z',
