@@ -8,6 +8,7 @@
   root.XiaohongshuChapterPolicy = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function createXiaohongshuPolicy() {
   const XIAOHONGSHU_TITLE_LIMIT = 11;
+  const XIAOHONGSHU_SUMMARY_LIMIT = 100;
 
   function chars(value) {
     return Array.from(String(value || ''));
@@ -87,6 +88,15 @@
       }
     }
 
+    if (lengthOf(target.summary) > XIAOHONGSHU_SUMMARY_LIMIT) {
+      if (options.truncateSummary) {
+        target.summary = truncate(target.summary, XIAOHONGSHU_SUMMARY_LIMIT);
+        addWarning(target, `章节简介已自动截断到 ${XIAOHONGSHU_SUMMARY_LIMIT} 个字。`);
+      } else {
+        addError(target, `章节简介超过 ${XIAOHONGSHU_SUMMARY_LIMIT} 个字。`);
+      }
+    }
+
     return target;
   }
 
@@ -101,6 +111,7 @@
   }
 
   return {
+    XIAOHONGSHU_SUMMARY_LIMIT,
     XIAOHONGSHU_TITLE_LIMIT,
     prepareXiaohongshuChapters
   };

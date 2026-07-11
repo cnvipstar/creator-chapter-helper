@@ -29,5 +29,6 @@ test('returns platform-specific chapter limits', () => {
 
   assert.equal(xiaohongshu.displayName, '小红书');
   assert.equal(xiaohongshu.titleLimit, 11);
-  assert.equal(xiaohongshu.supportsSummary, false);
+  assert.equal(xiaohongshu.summaryLimit, 100);
+  assert.equal(xiaohongshu.supportsSummary, true);
 });

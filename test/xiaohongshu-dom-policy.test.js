@@ -37,11 +37,30 @@ test('finds the connected current row by chapter time instead of stale row refer
 });
 
 test('distinguishes time match from complete chapter match', () => {
-  const row = { minutes: '00', seconds: '10', title: '' };
-  const chapter = { minutes: '00', seconds: '10', title: '生命周期的四个阶段' };
+  const row = { minutes: '00', seconds: '10', title: '', summary: '' };
+  const chapter = {
+    minutes: '00',
+    seconds: '10',
+    title: '生命周期的四个阶段',
+    summary: '描述生命周期各阶段的重点。'
+  };
 
   assert.equal(chapterItemMatchesValues(row, chapter, { includeTitle: false }), true);
   assert.equal(chapterItemMatchesValues(row, chapter), false);
+});
+
+test('includes chapter description in complete row matching', () => {
+  const chapter = {
+    minutes: '00',
+    seconds: '10',
+    title: '生命周期',
+    summary: '描述生命周期各阶段的重点。'
+  };
+  const row = { ...chapter, summary: '' };
+
+  assert.equal(chapterItemMatchesValues(row, chapter), false);
+  assert.equal(chapterItemMatchesValues(row, chapter, { includeSummary: false }), true);
+  assert.equal(chapterItemMatchesValues(chapter, chapter), true);
 });
 
 test('returns every connected row matching the same time so duplicates can be synchronized', () => {
@@ -74,6 +93,21 @@ test('finds mismatched rows by current visual order after Xiaohongshu reuses DOM
   ];
 
   assert.deepEqual(findMismatchedChapterIndexesByOrder(rows, chapters), [1]);
+});
+
+test('finds rows whose chapter description was not retained', () => {
+  const rows = [
+    { minutes: '00', seconds: '05', title: 'ITIL（中）', summary: '' }
+  ];
+  const chapters = [
+    { minutes: '00', seconds: '05', title: 'ITIL（中）', summary: '服务管理核心框架。' }
+  ];
+
+  assert.deepEqual(findMismatchedChapterIndexesByOrder(rows, chapters), [0]);
+  assert.deepEqual(
+    findMismatchedChapterIndexesByOrder(rows, chapters, { includeSummary: false }),
+    []
+  );
 });
 
 test('resolves text nodes inside action controls to the clickable ancestor', () => {

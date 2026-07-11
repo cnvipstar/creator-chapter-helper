@@ -17,6 +17,7 @@
 
   function chapterItemMatchesValues(values, chapter, options = {}) {
     const includeTitle = options.includeTitle !== false;
+    const includeSummary = includeTitle && options.includeSummary !== false;
     const sameTime = (
       normalizeTimeField(values && values.minutes, 2) === normalizeTimeField(chapter && chapter.minutes, 2) &&
       normalizeTimeField(values && values.seconds, 2) === normalizeTimeField(chapter && chapter.seconds, 2)
@@ -26,7 +27,10 @@
       return false;
     }
 
-    return !includeTitle || String((values && values.title) || '').trim() === String((chapter && chapter.title) || '').trim();
+    const sameTitle = String((values && values.title) || '').trim() === String((chapter && chapter.title) || '').trim();
+    const sameSummary = String((values && values.summary) || '').trim() === String((chapter && chapter.summary) || '').trim();
+
+    return (!includeTitle || sameTitle) && (!includeSummary || sameSummary);
   }
 
   function findChapterItemByTime(items, chapter, readValues, options = {}) {
@@ -39,7 +43,7 @@
 
     return Array.from(items || []).filter((item) =>
       isConnected(item) &&
-      chapterItemMatchesValues(reader(item), chapter, { includeTitle: false })
+      chapterItemMatchesValues(reader(item), chapter, { includeTitle: false, includeSummary: false })
     );
   }
 
@@ -49,7 +53,9 @@
 
     return Array.from(chapters || []).reduce((indexes, chapter, index) => {
       const row = Array.from(rows || [])[startIndex + index];
-      if (!chapterItemMatchesValues(readValues(row), chapter)) {
+      if (!chapterItemMatchesValues(readValues(row), chapter, {
+        includeSummary: options.includeSummary !== false
+      })) {
         indexes.push(index);
       }
       return indexes;

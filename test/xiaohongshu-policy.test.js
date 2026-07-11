@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const test = require('node:test');
 
 const {
+  XIAOHONGSHU_SUMMARY_LIMIT,
   XIAOHONGSHU_TITLE_LIMIT,
   prepareXiaohongshuChapters
 } = require('../src/lib/xiaohongshu-policy');
@@ -71,4 +72,28 @@ test('reports overlong titles unless truncation is enabled', () => {
   assert.equal(truncated.errors.length, 0);
   assert.equal(truncated.chapters[0].title, '一二三四五六七八九十甲');
   assert.match(truncated.warnings[0].message, /章节名已自动截断/);
+});
+
+test('keeps chapter descriptions up to 100 chars', () => {
+  const summary = '简'.repeat(100);
+  const result = prepareXiaohongshuChapters([chapter({ summary })]);
+
+  assert.equal(XIAOHONGSHU_SUMMARY_LIMIT, 100);
+  assert.equal(result.errors.length, 0);
+  assert.equal(result.chapters[0].summary, summary);
+});
+
+test('reports or truncates chapter descriptions over 100 chars', () => {
+  const overlong = chapter({ summary: '长'.repeat(101) });
+  const strict = prepareXiaohongshuChapters([overlong], {
+    truncateSummary: false
+  });
+  assert.match(strict.errors[0].message, /章节简介超过 100 个字/);
+
+  const truncated = prepareXiaohongshuChapters([overlong], {
+    truncateSummary: true
+  });
+  assert.equal(truncated.errors.length, 0);
+  assert.equal(truncated.chapters[0].summary, '长'.repeat(100));
+  assert.match(truncated.warnings[0].message, /章节简介已自动截断/);
 });

@@ -175,7 +175,7 @@
       2000,
       `第 ${chapter.lineNumber} 行章节时间写入后，无法在小红书列表中重新定位当前行。`
     );
-    await fillChapterTitlesByTime(modal, chapter);
+    await fillChapterTextByTime(modal, chapter);
     await sleep(120);
   }
 
@@ -269,9 +269,15 @@
 
     await fillValue(titleInput, chapter.title);
     titleInput.blur();
+
+    const summaryInput = getSummaryInput(item);
+    if (summaryInput) {
+      await fillValue(summaryInput, chapter.summary);
+      summaryInput.blur();
+    }
   }
 
-  async function fillChapterTitlesByTime(modal, chapter) {
+  async function fillChapterTextByTime(modal, chapter) {
     const items = findChapterItemsByTime(modal, chapter);
     if (items.length === 0) {
       throw new Error(`第 ${chapter.lineNumber} 行章节时间写入后，找不到对应章节行。`);
@@ -285,6 +291,12 @@
       if (String(titleInput.value || '').trim() !== chapter.title) {
         await fillValue(titleInput, chapter.title);
         titleInput.blur();
+      }
+
+      const summaryInput = getSummaryInput(item);
+      if (summaryInput && String(summaryInput.value || '').trim() !== chapter.summary) {
+        await fillValue(summaryInput, chapter.summary);
+        summaryInput.blur();
       }
     }
   }
@@ -399,15 +411,23 @@
     return item.querySelector('input[placeholder="输入章节名称"], input.title-field');
   }
 
+  function getSummaryInput(item) {
+    return item.querySelector(
+      'textarea[placeholder="输入章节描述"], input[placeholder="输入章节描述"], textarea.summary-field, input.summary-field'
+    );
+  }
+
   function readChapterItemValues(item) {
     const minuteInput = item && getMinuteInput(item);
     const secondInput = item && getSecondInput(item);
     const titleInput = item && getTitleInput(item);
+    const summaryInput = item && getSummaryInput(item);
 
     return {
       minutes: minuteInput ? minuteInput.value : '',
       seconds: secondInput ? secondInput.value : '',
-      title: titleInput ? titleInput.value : ''
+      title: titleInput ? titleInput.value : '',
+      summary: summaryInput ? summaryInput.value : ''
     };
   }
 
@@ -438,9 +458,16 @@
       chapters,
       {
         startIndex,
-        readValues: readChapterItemValues
+        readValues: readChapterItemValues,
+        includeSummary: supportsChapterSummary(modal)
       }
     );
+  }
+
+  function supportsChapterSummary(modal) {
+    return Boolean(modal.querySelector(
+      'textarea[placeholder="输入章节描述"], input[placeholder="输入章节描述"]'
+    ));
   }
 
   function findValidationProblems(modal) {
@@ -580,7 +607,8 @@
   }
 
   function isolatedFillValue(element, value) {
-    const descriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+    const prototype = Object.getPrototypeOf(element);
+    const descriptor = prototype && Object.getOwnPropertyDescriptor(prototype, 'value');
     if (descriptor && descriptor.set) {
       descriptor.set.call(element, value);
     } else {
@@ -710,7 +738,8 @@
           lineNumber: chapter.lineNumber,
           minutes: chapter.minutes,
           seconds: chapter.seconds,
-          title: chapter.title
+          title: chapter.title,
+          summary: chapter.summary
         }));
       } catch (_error) {
         return [];

@@ -20,8 +20,8 @@
       id: 'xiaohongshu',
       displayName: '小红书',
       titleLimit: 11,
-      summaryLimit: 0,
-      supportsSummary: false,
+      summaryLimit: 100,
+      supportsSummary: true,
       urlPatterns: ['https://creator.xiaohongshu.com/']
     }
   ];
